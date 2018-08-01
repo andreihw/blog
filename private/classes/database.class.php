@@ -31,22 +31,21 @@ class Database {
 
 class Posts extends Database {
   public $total_posts;
-
   public function count_total_posts() {
     $query = 'SELECT * FROM posts';
     $result = $this->link->query($query);
     $this->total_posts = $result->num_rows;
     return $this->total_posts;
   }
+  
   public function show_all_posts() {
     $post = array();
     $query = 'SELECT * FROM posts';
     $result = $this->link->query($query);
-    while($obj=mysqli_fetch_object($result)) {
-      $results[] = $obj;
-    }
-    return $results;
-
+    // while($obj=mysqli_fetch_object($result)) {
+    //   $results[] = $obj;
+    // }
+    return $result;
   }
 }
 ?>
