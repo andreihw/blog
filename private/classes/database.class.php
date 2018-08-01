@@ -29,7 +29,7 @@ class Database {
   }
 }
 
-class Posts extends Database {
+class Post extends Database {
   public $total_posts;
   public function count_total_posts() {
     $query = 'SELECT * FROM posts';
@@ -37,15 +37,24 @@ class Posts extends Database {
     $this->total_posts = $result->num_rows;
     return $this->total_posts;
   }
-  
+
   public function show_all_posts() {
     $post = array();
     $query = 'SELECT * FROM posts';
     $result = $this->link->query($query);
-    // while($obj=mysqli_fetch_object($result)) {
-    //   $results[] = $obj;
-    // }
+
     return $result;
+  }
+  
+  public function show_post() {
+    $post = array();
+    $stmt = $this->link->prepare('SELECT `title` FROM posts WHERE id = ?');
+    $stmt->bind_param('i', $_GET['id']);
+    $stmt->execute();
+    $stmt->bind_result($post);
+    $stmt->fetch();
+
+    return $post;
   }
 }
 ?>
