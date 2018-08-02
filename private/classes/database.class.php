@@ -38,6 +38,7 @@ class Posts extends Database {
     $this->total_posts = $result->num_rows;
     return $this->total_posts;
   }
+  
   public function show_all_posts() {
     $post = array();
     $query = 'SELECT * FROM posts';
